@@ -102,7 +102,14 @@ class CSP(BaseEstimator, TransformerMixin):
             
             # Compute log variance as features
             variance = np.var(filtered, axis=1)
-            features[i] = np.log(variance / np.sum(variance))
+            var_sum = np.sum(variance)
+            
+            # Prevent division by zero
+            if var_sum > 1e-10:
+                features[i] = np.log(variance / var_sum)
+            else:
+                # If variance is near zero, use small epsilon
+                features[i] = np.log((variance + 1e-10) / (var_sum + 1e-10))
         
         return features
     

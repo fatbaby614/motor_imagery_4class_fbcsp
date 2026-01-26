@@ -86,20 +86,24 @@ class Preprocessor:
             
         Returns
         -------
-        epochs : ndarray, shape (n_events, n_channels, n_epoch_samples)
+        epochs : ndarray, shape (n_valid_events, n_channels, n_epoch_samples)
             Epoched data
-        labels : ndarray, shape (n_events,)
+        labels : ndarray, shape (n_valid_events,)
             Event types
+            
+        Notes
+        -----
+        Epochs that fall outside the data range are skipped. The returned arrays
+        may have fewer trials than the input events array.
         """
         start_sample = int(epoch_start * self.sample_rate)
         end_sample = int(epoch_end * self.sample_rate)
         epoch_length = end_sample - start_sample
         
         n_channels = data.shape[0]
-        n_events = events.shape[0]
         
-        epochs = np.zeros((n_events, n_channels, epoch_length))
-        labels = np.zeros(n_events, dtype=int)
+        valid_epochs = []
+        valid_labels = []
         
         for i, (sample_idx, event_type) in enumerate(events):
             sample_idx = int(sample_idx)
@@ -110,8 +114,15 @@ class Preprocessor:
             if epoch_start_idx < 0 or epoch_end_idx > data.shape[1]:
                 continue
             
-            epochs[i] = data[:, epoch_start_idx:epoch_end_idx]
-            labels[i] = int(event_type)
+            epoch = data[:, epoch_start_idx:epoch_end_idx]
+            valid_epochs.append(epoch)
+            valid_labels.append(int(event_type))
+        
+        if len(valid_epochs) == 0:
+            raise ValueError("No valid epochs found. Check event timings and data length.")
+        
+        epochs = np.array(valid_epochs)
+        labels = np.array(valid_labels, dtype=int)
         
         return epochs, labels
     

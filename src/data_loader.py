@@ -33,6 +33,11 @@ class DataLoader:
             EEG data
         timestamps : ndarray, shape (n_samples,)
             Sample timestamps
+            
+        Raises
+        ------
+        ValueError
+            If fewer than n_channels EEG channels are found in the CSV
         """
         import pandas as pd
         
@@ -40,8 +45,13 @@ class DataLoader:
         
         # OpenBCI CSV typically has columns: Sample Index, EEG Channel 1, ..., EEG Channel N, ...
         # Extract EEG channels (usually the first n_channels columns after index)
-        channel_cols = [col for col in df.columns if 'EEG' in col or 'Channel' in col][:n_channels]
+        channel_cols = [col for col in df.columns if 'EEG' in col or 'Channel' in col]
         
+        if len(channel_cols) < n_channels:
+            raise ValueError(f"Expected {n_channels} EEG channels but found only {len(channel_cols)} in CSV. "
+                           f"Available columns: {df.columns.tolist()}")
+        
+        channel_cols = channel_cols[:n_channels]
         data = df[channel_cols].values.T
         
         # Try to get timestamps

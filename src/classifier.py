@@ -174,8 +174,10 @@ class MotorImageryClassifier:
             
             all_scores.append(scores)
         
-        # Normalize scores to probabilities
+        # Normalize scores to probabilities using numerically stable softmax
         all_scores = np.column_stack(all_scores)
+        # Clip extreme values to prevent overflow
+        all_scores = np.clip(all_scores, -500, 500)
         # Apply softmax
         exp_scores = np.exp(all_scores - np.max(all_scores, axis=1, keepdims=True))
         probabilities = exp_scores / np.sum(exp_scores, axis=1, keepdims=True)
