@@ -34,6 +34,7 @@ This project implements a complete pipeline for motor imagery EEG classification
 - MNE (for EEG processing)
 - matplotlib
 - pandas
+- seaborn (for visualizations)
 
 ### Install from source
 
@@ -90,7 +91,16 @@ accuracy = classifier.score(X_test, y_test)
 
 ### Running Examples
 
-Train a model with synthetic data:
+**Interactive Jupyter Notebook Tutorial:**
+
+```bash
+cd examples
+jupyter notebook tutorial.ipynb
+```
+
+The notebook provides a complete walkthrough with visualizations.
+
+**Train a model with synthetic data:**
 
 ```bash
 cd examples
@@ -117,7 +127,8 @@ motor_imagery_4class_fbcsp/
 │   └── config.py             # Configuration settings
 ├── examples/
 │   ├── train_example.py      # Training example script
-│   └── predict_example.py    # Prediction example script
+│   ├── predict_example.py    # Prediction example script
+│   └── tutorial.ipynb        # Interactive Jupyter notebook tutorial
 ├── requirements.txt          # Python dependencies
 ├── setup.py                  # Package setup
 └── README.md                 # This file

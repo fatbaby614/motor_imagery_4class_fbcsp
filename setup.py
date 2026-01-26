@@ -13,6 +13,7 @@ setup(
         'mne>=1.0.0',
         'matplotlib>=3.4.0',
         'pandas>=1.3.0',
+        'seaborn>=0.11.0',
     ],
     python_requires='>=3.7',
 )
