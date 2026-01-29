@@ -2,6 +2,8 @@
 
 A complete end-to-end pipeline for four-class motor imagery (MI) experiments built around OpenBCI + Lab Streaming Layer. The toolkit covers data acquisition, model training (Filter Bank CSP + SVM), offline evaluation, real-time cursor control, a visual debugging HUD, and a playful maze mini-game powered by your brain signals.
 
+![](https://github.com/fatbaby614/motor_imagery_4class_fbcsp/blob/main/%E8%BF%90%E5%8A%A8%E6%83%B3%E8%B1%A1%E8%B5%B0%E8%BF%B7%E5%AE%AB%E6%B8%B8%E6%88%8F.gif?raw=true)
+
 ---
 
 ## Features at a Glance
