@@ -1,0 +1,25 @@
+{
+  "sample_rate": 250,
+  "filter_banks": [
+    [
+      8,
+      10
+    ],
+    [
+      10,
+      16
+    ],
+    [
+      16,
+      24
+    ],
+    [
+      24,
+      32
+    ]
+  ],
+  "components_per_band": 2,
+  "svm_kernel": "linear",
+  "svm_c": 1.0,
+  "svm_class_weight": "balanced"
+}
