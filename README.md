@@ -46,7 +46,7 @@ A complete end-to-end pipeline for four-class motor imagery (MI) experiments bui
 ---
 
 ## 1. Acquire Training Data
-1. Make sure the LSL EEG stream is live (`obci_eeg1` by default).
+1. Make sure the LSL EEG stream is live (`obci_eeg1` by default).DataType is TimeSeriesRaw not TimeSeriesFilt in OpenBCI GUI
 2. Run:
    ```bash
    python data_acquisition.py <subject_id> <session_id> <trials_per_class>
